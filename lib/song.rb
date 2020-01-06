@@ -16,7 +16,15 @@ class Song
   end
 
   def self.all
-    @@songs.values
+    returned_songs = DB.exec("SELECT * FROM songs;")
+    songs = []
+    returned_songs.each() do |song|
+      name = song.fetch("name")
+      album_id = song.fetch("album_id").to_i
+      id = song.fetch("id").to_i
+      songs.push(Song.new({:name => name, :album_id => album_id, :id => id}))
+    end
+    songs
   end
 
   def save
