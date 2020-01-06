@@ -72,9 +72,9 @@ describe '#Album' do
     it("returns an album's songs") do
       album = Album.new({:name => "A Love Supreme", :id => nil})
       album.save()
-      song = Song.new({:name => "Naima", :album_id => 'id', :id => nil})
+      song = Song.new({:name => "Naima", :album_id => album.id, :id => nil})
       song.save()
-      song2 = Song.new({:name => "Cousin Mary", :album_id => 'id', :id => nil})
+      song2 = Song.new({:name => "Cousin Mary", :album_id => album.id, :id => nil})
       song2.save()
       expect(album.songs).to(eq([song, song2]))
     end

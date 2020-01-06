@@ -71,6 +71,3 @@ DEPENDENCIES
   rspec
   sinatra
   sinatra-contrib
-
-BUNDLED WITH
-   2.0.2
