@@ -79,4 +79,15 @@ describe '#Album' do
       expect(album.songs).to(eq([song, song2]))
     end
   end
+
+  describe('#sort_by_year') do
+    it("sorts albums by release year") do
+      album = Album.new({:name => "A Love Supreme", :id => nil, :release_year => 1976})
+      album.save()
+      album2 = Album.new({:name => "Not That", :id => nil, :release_year => 2019})
+      album2.save()
+      album.sort_by_year()
+      expect(album.songs).to(eq([album, album2]))
+    end
+  end
 end

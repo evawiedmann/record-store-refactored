@@ -1,9 +1,11 @@
 class Album
   attr_accessor :name, :id
+  # :release_year
 
   def initialize(attributes)
     @name = attributes.fetch(:name)
     @id = attributes.fetch(:id)
+    # @release_year = attributes.fetch(:release_year)
   end
 
   def self.all
@@ -20,10 +22,12 @@ class Album
   def save
     result = DB.exec("INSERT INTO albums (name) VALUES ('#{@name}') RETURNING id;")
     @id = result.first().fetch("id").to_i
+    # @release_year = result.first().fetch("release_year")
   end
 
   def ==(album_to_compare)
-    self.name() == album_to_compare.name()
+    (self.name == album_to_compare.name)
+     # && (self.release_year == album_to_compare.release_year)
   end
 
   def self.clear
@@ -49,5 +53,9 @@ end
 
   def songs
     Song.find_by_album(@id)
+  end
+
+  def sort_by_year()
+    album_list = DB.exec("SELECT * FROM albums ORDER BY RELEASE_YEAR;")
   end
 end
